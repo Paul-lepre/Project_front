@@ -42,18 +42,12 @@ export default {
   }),
   methods: {
     async login () {
-      await axios.post('http://localhost:3000/api/v1/login', {
-        body: {
-          username: this.email,
-          password: this.password
-        },
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded'
-        }
+      const res = await axios.post('http://localhost:3000/api/v1/login', {
+        username: this.email,
+        password: this.password
       })
-        .then(Response => {
-          console.log(Response)
-        })
+      console.log(res)
+      this.$router.push({ name: 'exo' })
     }
   }
 }

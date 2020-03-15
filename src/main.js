@@ -3,27 +3,39 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import createRouter from './router/index.js'
-const state = {
-  user: {}
-}
+import store from './store/index'
+import VueRouter from 'vue-router'
+
+import Exo from './components/Exo.vue'
+import Home from './components/HelloWorld.vue'
 
 // this line allows sending cookies to http://localhost:3000
 
 axios.defaults.withCredentials = true // this line here !
 
 Vue.use(VueAxios, axios)
+Vue.use(VueRouter)
 
 Vue.config.productionTip = false
 
-new Vue({
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/exo',
+      name: 'exo',
+      component: Exo
+    },
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    }
+  ]
+})
 
 new Vue({
-  data: state,
-  router: createRouter(state),
+  store,
+  router,
   vuetify,
   render: h => h(App)
 }).$mount('#app')
